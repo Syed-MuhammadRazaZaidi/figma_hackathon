@@ -11,6 +11,8 @@ const FigmaProductDetails = () => {
         alt="ecommerce"
         className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
         src="/nost.png"
+        width={500}
+        height={500}
       />
       <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 bg-white">
       <button className='flex items-center justify-center border-2 border-white bg-[#FF9F0D] w-[6rem] rounded-xl text-md text-gray-100 mb-5 py-1'>In stock</button>
