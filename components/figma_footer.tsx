@@ -43,7 +43,7 @@ const FigmaFooter = () => {
 
               <div className='flex items-center justify-center lg:justify-start gap-4'>
                 <Image 
-                  src="/watch.png"
+                  src="/Watch.png"
                   height={80} 
                   width={80} 
                   alt='opening hours icon'
