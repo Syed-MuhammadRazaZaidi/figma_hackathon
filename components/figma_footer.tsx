@@ -7,118 +7,122 @@ import Image from 'next/image';
 const FigmaFooter = () => {
   return (
     <>
-    <div className='container mx-auto mt-32 bg-black'>
-        <div className='flex items-center justify-between px-32'>
-        <div>
-        <h1 className='flex text-[#FF9F0D] text-4xl font-bold'>St<p className='text-white'>ill You Need Our Support ?</p></h1>
-        <h1 className='text-white mt-5 text-xl'>Don’t wait make a smart & logical quote here. Its pretty easy.</h1>
-        </div>
-        <div className='flex text-white'>
-        <input className='bg-[#FF9F0D] text-white px-10 text-start py-5 w-[20rem] rounded-lg' type="email" placeholder="Enter Your Email" />
-        <button className='flex items-center justify-center border-2 border-white bg-white w-[10rem] rounded-lg text-xl text-[#FF9F0D]' type="submit">Subscribe Now</button>
-        </div>
-        </div>
-        <div className="border border-b border-[#FF9F0D] mt-20 mx-32"></div>
-        <div>
-        <div className="flex items-center justify-between text-gray-300 pb-24 px-[3rem] mt-10">
-          <div className="py-10 space-y-6 h-64">
-            <ul className="text-2xl font-bold">About Us.</ul>
-            <li className="list-none">
-            orporate clients and leisure travelers has <br />
-            been relying on Groundlink for dependab <br />
-            safe, and professional chauffeured car <br />
-            service in major cities across World.</li>
+      <footer className='w-full bg-black'>
+        <div className='container mx-auto px-4 sm:px-6 lg:px-8 mt-32'>
+          <div className='flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 py-10'>
+            <div className='text-center lg:text-left max-w-xl'>
+              <h1 className='text-[#FF9F0D] text-3xl lg:text-4xl font-bold'>
+                St<span className='text-white'>ill You Need Our Support ?</span>
+              </h1>
+              <p className='text-white mt-4 text-lg'>Dont wait make a smart & logical quote here. Its pretty easy.</p>
+            </div>
+            
+            <div className='w-full lg:w-auto flex flex-col sm:flex-row items-center justify-center gap-4'>
+              <input 
+                className='bg-[#FF9F0D] text-white px-6 py-4 rounded-sm w-full sm:w-80'
+                type="email" 
+                placeholder="Enter Your Email" 
+              />
+              <button 
+                className='transition-all duration-300 hover:bg-[#FF9F0D] hover:text-white border-2 border-white bg-white rounded-sm text-xl text-[#FF9F0D] py-3 px-6 w-full sm:w-auto'
+                type="submit"
+              >
+                Subscribe Now
+              </button>
+            </div>
+          </div>
 
-            <div className='flex items-center gap-5'>
+          <div className="border-b border-[#FF9F0D] my-10"></div>
 
-            <div className='mt-5'>
-            <Image src="/watch.png"
-            height={100} 
-            width={100} 
-            alt='bowl'
-            />
-            </div>
-            <div className='mt-5 space-y-2'>
-                <h1 className='text-xl'>Opening Houres</h1>
-                <h1>Mon - Sat(8.00 - 6.00)</h1>
-                <h1>Sunday - Closed</h1>    
-            </div>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-gray-300 py-10 items-center justify-items-center text-center lg:text-left">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold">About Us.</h2>
+              <p className="text-base">
+                Corporate clients and leisure travelers has been relying on Groundlink for dependable safe, and professional chauffeured car service in major cities across World.
+              </p>
 
-          </div>
-          <div className="py-10 space-y-6 h-64">
-            <ul className="list-none text-2xl font-bold">Useful Links</ul>
-            <li className="list-none text-xl">About</li>
-            <li className="list-none text-xl">News</li>
-            <li className="list-none text-xl">Partners</li>
-            <li className="list-none text-xl">Team</li>
-            <li className="list-none text-xl">Menu</li>
-            <li className="list-none text-xl">Contacts</li>
-          </div>
-          <div className="py-10 space-y-6 h-64">
-            <ul className="list-none text-2xl font-bold">Help?</ul>
-            <li className="list-none text-xl">FAQ</li>
-            <li className="list-none">Term & conditions</li>
-            <li className="list-none">Reporting</li>
-            <li className="list-none text-xl">Documentation</li>
-            <li className="list-none text-xl">Support Policy</li>
-            <li className="list-none text-xl">Privacy</li>
-          </div>
-          <div className="py-10 space-y-6 h-64">
-            <ul className="list-none text-2xl font-bold">Recent Post</ul>
-            <li className="list-none flex gap-5 items-center justify-center ">
-            <div>
-            <Image src="/R1.png"
-            height={65} 
-            width={65} 
-            alt='bowl'
-            />
-            </div>
-            <div className='text-xl'>
-                <h1 className='text-gray-500 mb-1'>20 Feb 2022</h1>
-                <h1>Keep Your Business</h1>
-            </div>
-            </li>
-            <li className="list-none flex gap-5 items-center justify-center ">
-            <div>
-            <Image src="/R2.png"
-            height={65} 
-            width={65} 
-            alt='bowl'
-            />
-            </div>
-            <div className='text-xl'>
-                <h1 className='text-gray-500 mb-1'>20 Feb 2022</h1>
-                <h1>Keep Your Business</h1>
-            </div>
-            </li>
-            <li className="list-none flex gap-5 items-center justify-center ">
-            <div>
-            <Image src="/R3.png"
-            height={65} 
-            width={65} 
-            alt='bowl'
-            />
-            </div>
-            <div className='text-xl'>
-                <h1 className='text-gray-500 mb-1'>20 Feb 2022</h1>
-                <h1>Keep Your Business</h1>
-            </div>
-            </li>
-          </div>
-        </div>
-      </div>
-      </div>
-      <div className=' flex items-center justify-around mt-20 bg-[#4F4F4F] py-10'>
-                <div>
-                    <h1 className='text-gray-300 text-xl bg-[#4F4F4F]'>Copyright © 2022 by Ayeman. All Rights Reserved.</h1>
+              <div className='flex items-center justify-center lg:justify-start gap-4'>
+                <Image 
+                  src="/watch.png"
+                  height={80} 
+                  width={80} 
+                  alt='opening hours icon'
+                  className='w-20 object-contain'
+                />
+                <div className='space-y-2'>
+                  <h3 className='text-xl'>Opening Hours</h3>
+                  <p className='text-base'>Mon - Sat(8.00 - 6.00)</p>
+                  <p className='text-base'>Sunday - Closed</p>    
                 </div>
-                <div className="text-white bg-[#4F4F4F] flex gap-5 text-2xl">
-             <h1 className='bg-[#4F4F4F] text-[#4F4F4F]'>.</h1>
+              </div>
             </div>
-            </div>
-      </>
 
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold">Useful Links</h2>
+              {['About', 'News', 'Partners', 'Team', 'Menu', 'Contacts'].map((item, index) => (
+                <Link 
+                  key={index} 
+                  href="#" 
+                  className="block text-lg hover:text-[#FF9F0D] transition-colors"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold">Help?</h2>
+              {['FAQ', 'Term & conditions', 'Reporting', 'Documentation', 'Support Policy', 'Privacy'].map((item, index) => (
+                <Link 
+                  key={index} 
+                  href="#" 
+                  className="block text-lg hover:text-[#FF9F0D] transition-colors"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold">Recent Post</h2>
+              {[1, 2, 3].map((item) => (
+                <div key={item} className="flex gap-4 items-center justify-center lg:justify-start">
+                  <Image 
+                    src={`/R${item}.png`}
+                    height={65} 
+                    width={65} 
+                    alt={`recent post ${item}`}
+                    className='w-16 object-cover rounded'
+                  />
+                  <div>
+                    <p className='text-gray-500 text-sm'>20 Feb 2022</p>
+                    <h3 className='text-lg hover:text-[#FF9F0D] transition-colors cursor-pointer'>
+                      Keep Your Business
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className='bg-[#4F4F4F] py-6'>
+          <div className='bg-transparent container mx-auto px-4 flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4'>
+            <p className='bg-transparent text-gray-300 text-center'>
+              Copyright © {new Date().getFullYear()} by Ayeman. All Rights Reserved.
+            </p>
+            <div className=" bg-transparent flex justify-center gap-6">
+              {[FaFacebook, FaInstagram, FaYoutube, FaXTwitter].map((Icon, index) => (
+                <Icon 
+                  key={index}
+                  className="bg-transparent text-white text-xl hover:text-[#FF9F0D] transition-colors cursor-pointer"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   )
 }
 
