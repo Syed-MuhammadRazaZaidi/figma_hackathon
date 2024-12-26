@@ -14,30 +14,49 @@ const FigmaNavbar = () => {
   return (
     <div className='bg-black mt-10'>
       <nav className='container mx-auto bg-black px-4'>
-        <div className='flex items-center justify-between py-4'>
+        {/* Logo for large screens - centered */}
+        <div className='hidden lg:flex justify-center py-4'>
           <div className='flex items-center text-2xl'>
             <h1 className='font-bold text-[#FF9F0D]'>Food</h1>
             <h1 className='font-bold text-white'>tuck</h1>
           </div>
+        </div>
 
-          {/* Mobile Menu */}
-          <div className="lg:hidden bg-transparent">
-            <Sheet>
-              <SheetTrigger>
-                <HiMenuAlt3 className="bg-transparent text-orange-500 text-[34px] cursor-pointer" />
-              </SheetTrigger>
-              <SheetContent>
-                <div className="bg-transparent flex flex-col gap-4 mt-8">
-                  <Link className='bg-transparent' href={"/"}>Home</Link>
-                  <Link className='bg-transparent' href={"/menu"}>Menu</Link>
-                  <Link className='bg-transparent' href={"/blog"}>Blog</Link>
-                  <Link className='bg-transparent' href={"/pages"}>Pages</Link>
-                  <Link className='bg-transparent' href={"/about"}>About</Link>
-                  <Link className='bg-transparent' href={"/shop"}>Shop</Link>
-                  <Link className='bg-transparent' href={"/contact"}>Contact</Link>
-                </div>
-              </SheetContent>
-            </Sheet>
+        {/* Mobile Layout */}
+        <div className='flex lg:hidden items-center justify-between py-4'>
+          {/* Logo and Mobile Menu Container */}
+          <div className='flex items-center gap-4'>
+            {/* Mobile Menu */}
+            <div className="order-first bg-transparent">
+              <Sheet>
+                <SheetTrigger>
+                  <HiMenuAlt3 className="bg-transparent text-orange-500 text-[34px] cursor-pointer" />
+                </SheetTrigger>
+                <SheetContent side="left">
+                  <div className="bg-transparent flex flex-col gap-4 mt-8">
+                    <Link className='bg-transparent' href={"/"}>Home</Link>
+                    <Link className='bg-transparent' href={"/menu"}>Menu</Link>
+                    <Link className='bg-transparent' href={"/blog"}>Blog</Link>
+                    <Link className='bg-transparent' href={"/pages"}>Pages</Link>
+                    <Link className='bg-transparent' href={"/about"}>About</Link>
+                    <Link className='bg-transparent' href={"/shop"}>Shop</Link>
+                    <Link className='bg-transparent' href={"/contact"}>Contact</Link>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* Logo for mobile */}
+            <div className='flex items-center text-2xl lg:hidden'>
+              <h1 className='font-bold text-[#FF9F0D]'>Food</h1>
+              <h1 className='font-bold text-white'>tuck</h1>
+            </div>
+          </div>
+
+          {/* Mobile Search and Cart */}
+          <div className="flex items-center gap-4">
+            <IoSearchOutline className="text-white text-2xl"/>
+            <HiOutlineShoppingBag className='text-xl text-white'/>
           </div>
         </div>
 

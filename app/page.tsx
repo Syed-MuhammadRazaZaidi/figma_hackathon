@@ -21,9 +21,9 @@ const page = () => {
       <Clients/>
       <MenuComponent/>
       <OurChefs/>
-      {/* <FigmaChefs/> */}
       <ActiveRestaurant/>
       <ChooseFood/>
+      {/* <FigmaChefs/> */}
       
     </div>
   )

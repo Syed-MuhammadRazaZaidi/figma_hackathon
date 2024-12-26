@@ -17,7 +17,7 @@ const FigmaFooter = () => {
               <p className='text-white mt-4 text-lg'>Dont wait make a smart & logical quote here. Its pretty easy.</p>
             </div>
             
-            <div className='w-full lg:w-auto flex flex-col sm:flex-row items-center justify-center gap-4'>
+            <div className='w-full lg:w-auto flex flex-col sm:flex-row items-center justify-center'>
               <input 
                 className='bg-[#FF9F0D] text-white px-6 py-4 rounded-sm w-full sm:w-80'
                 type="email" 
