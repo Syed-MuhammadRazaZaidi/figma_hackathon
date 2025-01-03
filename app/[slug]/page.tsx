@@ -5,12 +5,12 @@ const page = ({params}:any) => {
   return (
     <div className='bg-white'>
         <div className="bg-transparent min-h-screen bg-white">
-      {/* Background Section */}
+
       <div
         className=" w-full bg-no-repeat bg-center flex justify-center bg-cover"
         style={{
           backgroundImage: "url('/heropic.png')",
-          height: "300px", // Use fixed height
+          height: "300px", 
         }}
       >
         {/* Header Section */}

@@ -21,7 +21,6 @@ const MenuComponent = () => {
 
         <div className="mb-4 sm:mb-6 overflow-x-auto">
           <ul className="flex flex-nowrap justify-center gap-3 sm:gap-4 md:gap-8 lg:gap-12 min-w-max mx-auto px-4">
-            {/* ... menu list items remain the same */}
           </ul>
         </div>
 

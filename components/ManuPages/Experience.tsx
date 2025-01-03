@@ -19,7 +19,7 @@ export default function Experience() {
               <div>
                 <Image
                   src={item.src}
-                  alt={item.label}  // Descriptive alt text based on item
+                  alt={item.label}  
                   width={120}
                   height={120}
                   className="bg-transparent mb-6 sm:mb-8 lg:mb-10"

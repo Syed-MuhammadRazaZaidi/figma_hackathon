@@ -1,14 +1,14 @@
-import FigmaProductDetails from '@/components/figma_productdetails'
 import Hero from "@/components/ShopPages/ShopHero"
-import ShoppingCart from '@/components/ShopPages/ShopingCart'
 import React from 'react'
+import ShopProducts from './shop'
 
 const FigmaCart = () => {
   return (
     <>
     <Hero />
-    <FigmaProductDetails/>
-    <ShoppingCart />
+    <ShopProducts/>
+    {/* <FigmaProductDetails/>
+    <ShoppingCart /> */}
     </>
   )
 }

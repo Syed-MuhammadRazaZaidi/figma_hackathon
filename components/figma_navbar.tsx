@@ -9,24 +9,20 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { User } from 'lucide-react';
 
 const FigmaNavbar = () => {
   return (
     <div className='bg-black mt-10'>
       <nav className='container mx-auto bg-black px-4'>
-        {/* Logo for large screens - centered */}
         <div className='hidden lg:flex justify-center py-4'>
           <div className='flex items-center text-2xl'>
             <h1 className='font-bold text-[#FF9F0D]'>Food</h1>
             <h1 className='font-bold text-white'>tuck</h1>
           </div>
         </div>
-
-        {/* Mobile Layout */}
         <div className='flex lg:hidden items-center justify-between py-4'>
-          {/* Logo and Mobile Menu Container */}
           <div className='flex items-center gap-4'>
-            {/* Mobile Menu */}
             <div className="order-first bg-transparent">
               <Sheet>
                 <SheetTrigger>
@@ -46,17 +42,21 @@ const FigmaNavbar = () => {
               </Sheet>
             </div>
 
-            {/* Logo for mobile */}
+
             <div className='flex items-center text-2xl lg:hidden'>
               <h1 className='font-bold text-[#FF9F0D]'>Food</h1>
               <h1 className='font-bold text-white'>tuck</h1>
             </div>
           </div>
 
-          {/* Mobile Search and Cart */}
           <div className="flex items-center gap-4">
-            <IoSearchOutline className="text-white text-2xl"/>
-            <HiOutlineShoppingBag className='text-xl text-white'/>
+            <IoSearchOutline size={24} className="text-white text-2xl hover:text-[#FF9F0D] transition-colors"/>
+            <Link href="/cart" className="text-white hover:text-[#FF9F0D] transition-colors" aria-label="Shopping Cart">
+            <HiOutlineShoppingBag size={24} className='text-xl text-white hover:text-[#FF9F0D] transition-colors '/>
+            </Link>
+            <Link href="/signup" className="text-white hover:text-[#FF9F0D] transition-colors" aria-label="User Profile">
+              <User size={24} />
+            </Link>
           </div>
         </div>
 
@@ -76,8 +76,13 @@ const FigmaNavbar = () => {
               <input className="bg-black text-sm px-3 w-full" type="text" placeholder="Search..." />
               <IoSearchOutline className="text-white text-2xl"/>
             </div>
-            <div>
-              <HiOutlineShoppingBag className='text-xl text-white'/>
+            <div className='flex gap-2'>
+            <Link href="/cart" className="text-white hover:text-[#FF9F0D] transition-colors" aria-label="Shopping Cart">
+            <HiOutlineShoppingBag size={24} className='text-xl text-white  '/>
+            </Link>
+            <Link href="/signup" className="text-white hover:text-[#FF9F0D] transition-colors" aria-label="User Profile">
+              <User size={24} />
+            </Link>
             </div>
           </div>
         </div>

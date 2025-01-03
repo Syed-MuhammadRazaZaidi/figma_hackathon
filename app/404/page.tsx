@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Link from "next/link";
-// import { IoChevronForwardOutline } from "react-icons/io5";
+
 import { FcGoogle } from "react-icons/fc";
 import { ImAppleinc } from "react-icons/im";
 import { Input } from "@/components/ui/input";
