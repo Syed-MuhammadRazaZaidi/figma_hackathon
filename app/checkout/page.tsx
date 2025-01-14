@@ -1,12 +1,14 @@
 import React from 'react'
-import CheckOutHero from './CheckoutHero'
+import CheckoutHero from './CheckoutHero'
+import CheckoutPage from './checkoutpage'
 
-const CheckOut = () => {
+const page = () => {
   return (
     <div>
-        <CheckOutHero />    
+      <CheckoutHero/>
+      <CheckoutPage/>
     </div>
   )
 }
 
-export default CheckOut
+export default page

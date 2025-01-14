@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { urlFor } from "../../../sanity/lib/image";
 import Image from "next/image";
+import { useCart } from "../../context/page";
 
 interface Product {
   _id: string;
@@ -26,6 +27,7 @@ export default function ProductsPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
+  const { addItem } = useCart();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -55,6 +57,19 @@ export default function ProductsPage() {
     return <div className="bg-white flex justify-center items-center h-screen">No product found.</div>;
   }
 
+  const handleAddToCart = () => {
+    if (product) {
+      addItem({
+        id: product._id,
+        name: product.title,
+        price: product.price,
+        quantity: 1,
+        image: urlFor(product.imageSrc.asset).url(),
+      });
+      alert(`${product.title} has been added to the cart!`);
+    }
+  };
+
   return (
     <div className="py-24 mx-auto bg-white w-full">
       <div className="w-full px-4 gap-10 lg:px-72 sm:gap-10 py-24 mx-auto bg-white flex flex-col lg:flex-row justify-center">
@@ -75,6 +90,12 @@ export default function ProductsPage() {
           <p className="bg-white title-font text-3xl text-gray-600 font-bold mt-10">
             ${product.price}
           </p>
+          <button
+            onClick={handleAddToCart}
+            className="flex items-center justify-center border-2 border-white bg-[#FF9F0D] w-[10rem] text-xl text-gray-100 mb-5 py-3 mt-5"
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
       <div className="bg-white container lg:py-24 mx-auto">
