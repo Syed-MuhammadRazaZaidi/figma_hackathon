@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { urlFor } from "../../../sanity/lib/image";
 import Image from "next/image";
-import { useCart } from "../../context/page";
+import { useCart } from "../../context/CartContext";
 
 interface Product {
   _id: string;

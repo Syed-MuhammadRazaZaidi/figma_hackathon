@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useCart } from "../context/page";
+import { useCart } from "../context/CartContext";
 import { useRouter } from 'next/navigation';
 
 const ShoppingCart: React.FC = () => {

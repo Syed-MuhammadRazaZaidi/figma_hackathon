@@ -1,7 +1,7 @@
 import FigmaFooter from "@/components/figma_footer";
 import "./globals.css";
 import FigmaNavbar from "@/components/figma_navbar";
-import { CartProvider } from "../app/context/page";
+import { CartProvider } from "./context/CartContext";
 
 export default function RootLayout({
   children,
