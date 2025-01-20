@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity';
 
 const product = defineType({
   name: 'product',
@@ -37,7 +37,13 @@ const product = defineType({
       title: 'Price',
       type: 'number',
     }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      description: 'Category of the product (e.g., Burger, Sandwich, Drink, etc.)',
+    }),
   ],
-})
+});
 
-export default product
+export default product;

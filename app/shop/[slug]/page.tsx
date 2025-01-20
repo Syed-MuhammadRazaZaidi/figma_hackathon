@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { urlFor } from "../../../sanity/lib/image";
 import Image from "next/image";
 import { useCart } from "../../context/CartContext";
+import Link from "next/link";
 
 interface Product {
   _id: string;
@@ -14,47 +15,91 @@ interface Product {
   description: string;
   imageSrc: { asset: { url: string } };
   price: number;
+  category: string;
 }
 
 const getProduct = async (slug: string): Promise<Product> => {
   const product = await client.fetch(
-    `*[_type == "product" && slug.current == "${slug.toLowerCase()}"][0]`
+    `*[_type == "product" && slug.current == "${slug.toLowerCase()}"][0]{
+      _id,
+      title,
+      slug,
+      description,
+      imageSrc,
+      price,
+      category
+    }`
   );
   return product as Product;
 };
 
+const getRelatedProducts = async (currentProduct: Product): Promise<Product[]> => {
+  // Fetch all products excluding the current product
+  const allProducts = await client.fetch(
+    `*[_type == "product" && _id != "${currentProduct._id}"]{
+      _id,
+      title,
+      slug,
+      description,
+      imageSrc,
+      price,
+      category
+    }`
+  );
+
+  // Shuffle the array randomly
+  const shuffledProducts = allProducts.sort(() => Math.random() - 0.5);
+
+  // Limit to 4 products
+  return shuffledProducts.slice(0, 4);
+};
+
 export default function ProductsPage() {
   const [product, setProduct] = useState<Product | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
   const { addItem } = useCart();
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchProductAndRelated = async () => {
       setIsLoading(true);
       try {
         if (typeof params.slug === "string") {
+          // Fetch the current product
           const productData = await getProduct(params.slug);
+          console.log("Current Product:", productData); // Debugging
           setProduct(productData);
+
+          // Fetch related products
+          const relatedProductsData = await getRelatedProducts(productData);
+          console.log("Related Products Data:", relatedProductsData); // Debugging
+          setRelatedProducts(relatedProductsData);
         } else {
           console.error("Slug is not a string:", params.slug);
         }
       } catch (error) {
-        console.error("Error fetching product:", error);
+        console.error("Error fetching product or related products:", error);
       } finally {
         setIsLoading(false);
       }
     };
+
     if (params.slug) {
-      fetchProduct();
+      fetchProductAndRelated();
     }
-  }, [params.slug]);
+  }, [params.slug]); // Re-fetch when params.slug changes
 
   if (isLoading) {
     return <div className="bg-white flex justify-center items-center h-screen">Loading...</div>;
   }
+
   if (!product) {
-    return <div className="bg-white flex justify-center items-center h-screen">No product found.</div>;
+    return (
+      <div className="bg-white flex justify-center items-center h-screen">
+        <p>No product found.</p>
+      </div>
+    );
   }
 
   const handleAddToCart = () => {
@@ -72,6 +117,7 @@ export default function ProductsPage() {
 
   return (
     <div className="py-24 mx-auto bg-white w-full">
+      {/* Product Details Section */}
       <div className="w-full px-4 gap-10 lg:px-72 sm:gap-10 py-24 mx-auto bg-white flex flex-col lg:flex-row justify-center">
         <div className="lg:w-4/5 mx-auto flex flex-wrap bg-white justify-center">
           <Image
@@ -98,129 +144,48 @@ export default function ProductsPage() {
           </button>
         </div>
       </div>
-      <div className="bg-white container lg:py-24 mx-auto">
-        <div className="bg-white flex items-center gap-4">
-          <button className="flex items-center justify-center border-2 border-white bg-[#FF9F0D] w-[10rem] text-xl text-gray-100 mb-5 py-3">
-            Description
-          </button>
-          <h1 className="bg-white text-gray-800">Reviews (24)</h1>
-        </div>
-        <div className="bg-white text-gray-400">
-          <h1 className="bg-white">
-            Nam tristique porta ligula, vel viverra sem eleifend nec. Nulla sed
-            purus augue, eu euismod tellus. Nam mattis eros nec mi sagittis
-            sagittis. Vestibulum suscipit cursus bibendum. Integer at justo eget
-            sem auctor auctor eget vitae arcu. Nam tempor malesuada porttitor.
-            Nulla quis dignissim ipsum. Aliquam pulvinar iaculis justo, sit amet
-            interdum sem hendrerit vitae. Vivamus vel erat tortor. Nulla
-            facilisi. In nulla quam, lacinia eu aliquam ac, aliquam in nisl.
-          </h1>
-          <h1 className="bg-white mt-5">
-            Suspendisse cursus sodales placerat. Morbi eu lacinia ex. Curabitur
-            blandit justo urna, id porttitor est dignissim nec. Pellentesque
-            scelerisque hendrerit posuere. Sed at dolor quis nisi rutrum
-            accumsan et sagittis massa. Aliquam aliquam accumsan lectus quis
-            auctor. Curabitur rutrum massa at volutpat placerat. Duis sagittis
-            vehicula fermentum. Integer eu vulputate justo. Aenean pretium odio
-            vel tempor sodales. Suspendisse eu fringilla leo, non aliquet sem.
-          </h1>
-        </div>
-        <div className="bg-white mt-5">
-          <h1 className="bg-white text-xl text-gray-800 mb-5">Key Benefits</h1>
-          <ul className="bg-white list-disc ml-6">
-            <li className="bg-white text-gray-400">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </li>
-            <li className="bg-white text-gray-400">
-              Maecenas ullamcorper est et massa mattis condimentum.
-            </li>
-            <li className="bg-white text-gray-400">
-              Vestibulum sed massa vel ipsum imperdiet malesuada id tempus nisl.
-            </li>
-            <li className="bg-white text-gray-400">
-              Etiam nec massa et lectus faucibus ornare congue in nunc.
-            </li>
-            <li className="bg-white text-gray-400">
-              Mauris eget diam magna, in blandit turpis.
-            </li>
-          </ul>
-        </div>
-      </div>
+
+      {/* Related Products Section */}
       <div className="bg-white container px-5 mx-auto">
         <div>
           <h1 className="bg-white text-3xl font-bold text-gray-800 mb-5">
-            Similar Products
+            Related Products
           </h1>
         </div>
-        <div className="bg-white flex flex-wrap -m-4">
-          <div className="bg-white lg:w-1/4 md:w-1/2 p-4 w-full mb-10">
-            <a className="bg-white block relative rounded overflow-hidden">
-              <Image
-                height={500}
-                width={1000}
-                alt="ecommerce"
-                className="bg-white object-cover object-center w-full h-auto block"
-                src="/p1.png"
-              />
-            </a>
-            <div className="bg-white mt-4">
-              <h3 className="bg-white text-black title-font mb-1 text-lg font-bold">
-                Fresh Lime
-              </h3>
-              <p className="bg-white mt-1 text-yellow-500 text-xl">$38.00</p>
-            </div>
-          </div>
-          <div className="bg-white lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="bg-white block relative rounded overflow-hidden">
-              <Image
-                height={500}
-                width={500}
-                alt="ecommerce"
-                className="bg-white object-cover object-center w-full h-auto block"
-                src="/p2.png"
-              />
-            </a>
-            <div className="bg-white mt-4">
-              <h3 className="bg-white text-lg font-bold title-font mb-1 text-black">
-                Chocolate Muffin
-              </h3>
-              <p className="bg-white mt-1 text-yellow-500 text-xl">$28.00</p>
-            </div>
-          </div>
-          <div className="bg-white lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="bg-white block relative rounded overflow-hidden">
-              <Image
-                height={500}
-                width={500}
-                alt="ecommerce"
-                className="bg-white object-cover object-center w-full h-auto block"
-                src="/p3.png"
-              />
-            </a>
-            <div className="bg-white mt-4">
-              <h3 className="bg-white text-black text-lg font-bold title-font mb-1">
-                Burger
-              </h3>
-              <p className="bg-white mt-1 text-yellow-500 text-xl">$21.00</p>
-            </div>
-          </div>
-          <div className="bg-white lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="bg-white block relative rounded overflow-hidden">
-              <Image
-                height={500}
-                width={500}
-                alt="ecommerce"
-                className="bg-white object-cover object-center w-full h-auto block"
-                src="/p4.png"
-              />
-            </a>
-            <div className="bg-white mt-4">
-              <h3 className="bg-white text-black title-font mb-1 text-lg font-bold">
-                Fresh Lime
-              </h3>
-              <p className="bg-white mt-1 text-yellow-500 text-xl">$38.00</p>
-            </div>
-          </div>
+        <div className="bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {relatedProducts.length > 0 ? (
+            relatedProducts.map((relatedProduct) => (
+              <Link
+                key={relatedProduct._id}
+                href={`/shop/${relatedProduct.slug.current}`}
+                className="rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105"
+              >
+                <div className="relative h-64 w-full">
+                  <Image
+                    src={urlFor(relatedProduct.imageSrc.asset).url()}
+                    alt={relatedProduct.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2 whitespace-nowrap">
+                    {relatedProduct.title}
+                  </h3>
+                  <p className="text-gray-600">{relatedProduct.description}</p>
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#FF9F0D] text-xl font-bold">
+                        ${relatedProduct.price}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className="bg-white text-gray-600">No related products found.</p>
+          )}
         </div>
       </div>
     </div>
