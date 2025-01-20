@@ -147,7 +147,7 @@ export default function ProductsPage() {
 
       {/* Related Products Section */}
       <div className="bg-white container px-5 mx-auto">
-        <div>
+        <div className="bg-white">
           <h1 className="bg-white text-3xl font-bold text-gray-800 mb-5">
             Related Products
           </h1>
@@ -158,24 +158,24 @@ export default function ProductsPage() {
               <Link
                 key={relatedProduct._id}
                 href={`/shop/${relatedProduct.slug.current}`}
-                className="rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105"
+                className="rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 bg-white"
               >
-                <div className="relative h-64 w-full">
+                <div className="relative h-64 w-full bg-white">
                   <Image
                     src={urlFor(relatedProduct.imageSrc.asset).url()}
                     alt={relatedProduct.title}
                     fill
-                    className="object-cover"
+                    className="object-cover bg-white"
                   />
                 </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2 whitespace-nowrap">
+                <div className="p-4 bg-white">
+                  <h3 className="text-lg font-semibold mb-2 whitespace-nowrap bg-white">
                     {relatedProduct.title}
                   </h3>
-                  <p className="text-gray-600">{relatedProduct.description}</p>
-                  <div className="flex items-center justify-between mt-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#FF9F0D] text-xl font-bold">
+                  <p className="text-gray-600 bg-white">{relatedProduct.description}</p>
+                  <div className="flex items-center justify-between mt-4 bg-white">
+                    <div className="flex items-center gap-2 bg-white">
+                      <span className="text-[#FF9F0D] text-xl font-bold bg-white">
                         ${relatedProduct.price}
                       </span>
                     </div>
