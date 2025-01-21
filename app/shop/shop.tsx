@@ -456,9 +456,9 @@ export default function Home() {
                 onChange={handleItemsPerPageChange}
                 className="bg-white p-2 border border-gray-300 rounded"
               >
-                <option value="6">6 Items</option>
-                <option value="12">12 Items</option>
-                <option value="24">24 Items</option>
+                <option className="bg-white" value="6">6 Items</option>
+                <option className="bg-white" value="12">12 Items</option>
+                <option className="bg-white" value="24">24 Items</option>
               </select>
             </div>
           </div>
