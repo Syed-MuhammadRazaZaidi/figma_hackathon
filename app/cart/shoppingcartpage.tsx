@@ -12,6 +12,9 @@ const ShoppingCart: React.FC = () => {
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [isClient, setIsClient] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const [attempts, setAttempts] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -19,14 +22,38 @@ const ShoppingCart: React.FC = () => {
   }, []);
 
   const handleApplyCoupon = () => {
-    if (couponCode === "DISCOUNT10") {
+    if (attempts >= 3) {
+      alert("Too many attempts. Please try again later.");
+      return;
+    }
+    const sanitizedCode = couponCode.trim().toUpperCase();
+    if (sanitizedCode === "DISCOUNT10") {
       setDiscount(0.1);
     } else {
       setDiscount(0);
+      setAttempts(attempts + 1);
+      alert("Invalid coupon code. Please try again.");
     }
   };
 
+  const handleQuantityChange = (id: string, value: string) => {
+    const quantity = parseInt(value);
+    if (isNaN(quantity) || quantity < 0) {
+      alert("Invalid quantity. Please enter a valid number.");
+      return;
+    }
+    if (quantity > 10) {
+      alert("Maximum quantity limit reached.");
+      return;
+    }
+    updateQuantity(id, quantity);
+  };
+
   const handleProceedToCheckout = () => {
+    if (cartItems.length === 0) {
+      alert("Your cart is empty. Add items to proceed.");
+      return;
+    }
     const cartData = {
       cartItems,
       cartSubtotal,
@@ -34,12 +61,16 @@ const ShoppingCart: React.FC = () => {
       shippingCharges,
       totalAmount
     };
-
-    const queryString = new URLSearchParams({
-      cartData: JSON.stringify(cartData)
-    }).toString();
-
-    router.push(`/checkout?${queryString}`);
+    try {
+      // Simulate a successful checkout process
+      const queryString = new URLSearchParams({
+        cartData: JSON.stringify(cartData)
+      }).toString();
+      router.push(`/checkout?${queryString}`);
+    } catch (error) {
+      console.error("Checkout error:", error);
+      setCheckoutError("Checkout failed. Please try again.");
+    }
   };
 
   const cartSubtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -54,7 +85,7 @@ const ShoppingCart: React.FC = () => {
     <div className="bg-white font-sans">
       <div className="bg-white py-12 px-6 md:px-16 lg:px-28">
         {cartItems.length === 0 ? (
-          <p className="bg-white">Your cart is empty.</p>
+          <p className="bg-white text-center text-gray-500">Your cart is empty. Start shopping now!</p>
         ) : (
           <table className="bg-white w-full border-collapse">
             <thead>
@@ -76,6 +107,7 @@ const ShoppingCart: React.FC = () => {
                       width={64}
                       height={64}
                       className="bg-white w-16 h-16 object-cover rounded mr-4"
+                      loading="lazy"
                     />
                     <span className="bg-white">{item.name}</span>
                   </td>
@@ -84,7 +116,7 @@ const ShoppingCart: React.FC = () => {
                     <Input
                       type="number"
                       value={item.quantity}
-                      onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 0)}
+                      onChange={(e) => handleQuantityChange(item.id, e.target.value)}
                       className="bg-white w-16 border rounded px-2 py-1 text-center"
                       min="0"
                     />
@@ -117,6 +149,9 @@ const ShoppingCart: React.FC = () => {
                 Apply
               </Button>
             </div>
+            {discount === 0 && couponCode !== "" && (
+              <p className="bg-white text-red-500 text-sm mt-2">Invalid coupon code.</p>
+            )}
           </div>
 
           <div className="bg-white w-full lg:w-1/3">
@@ -137,6 +172,9 @@ const ShoppingCart: React.FC = () => {
                 <span className="bg-white">Total Amount</span>
                 <span className="bg-white">${totalAmount.toFixed(2)}</span>
               </div>
+              {checkoutError && (
+                <p className="bg-white text-red-500 text-sm mt-2">{checkoutError}</p>
+              )}
               <Button
                 onClick={handleProceedToCheckout}
                 className="w-full bg-orange-500 text-white mt-4 py-3 rounded font-semibold"
