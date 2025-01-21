@@ -10,7 +10,7 @@ import Link from "next/link";
 import DOMPurify from "dompurify";
 import validator from "validator";
 import { debounce } from "lodash";
-import Fuse from "fuse.js"; 
+import Fuse from "fuse.js";
 
 interface FoodItem {
   _id: string;
@@ -46,7 +46,7 @@ const SearchInput = memo(({ searchQuery, onSearchInput }: { searchQuery: string;
       placeholder="Search Products..."
       value={searchQuery}
       onChange={onSearchInput}
-      className="flex-grow bg-gray-50"
+      className="bg-white flex-grow bg-gray-50"
       ref={inputRef}
     />
   );
@@ -72,13 +72,24 @@ export default function Home() {
     { value: "priceLowToHigh", label: "Price: Low to High" },
     { value: "priceHighToLow", label: "Price: High to Low" },
   ]);
-  const [suggestions, setSuggestions] = useState<string[]>([]); // State for search suggestions
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   // Fetch all data on component mount
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const foodQuery = `*[_type == "food"]{ ... }`;
+      const foodQuery = `*[_type == "food"]{
+        _id,
+        name,
+        category,
+        price,
+        originalPrice,
+        tags,
+        image,
+        description,
+        available,
+        _createdAt
+      }`;
       const foods = await client.fetch(foodQuery);
       setFoods(foods);
 
@@ -118,19 +129,26 @@ export default function Home() {
   }, []);
 
   // Debounced Search Input Handler
-  const debouncedSearchInput = debounce((value: string) => {
-    setSearchQuery(value);
-  }, 100);
+  const debouncedSearchInput = useMemo(
+    () =>
+      debounce((value: string) => {
+        setSearchQuery(value);
+      }, 100),
+    []
+  );
 
-  const handleSearchInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
-    const sanitizedInput = DOMPurify.sanitize(input);
-    if (sanitizedInput === "" || validator.isAlphanumeric(sanitizedInput.replace(/\s/g, ""))) {
-      debouncedSearchInput(sanitizedInput);
-    } else {
-      console.error("Invalid input: Only alphanumeric characters and spaces are allowed.");
-    }
-  }, []);
+  const handleSearchInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const input = e.target.value;
+      const sanitizedInput = DOMPurify.sanitize(input);
+      if (sanitizedInput === "" || validator.isAlphanumeric(sanitizedInput.replace(/\s/g, ""))) {
+        debouncedSearchInput(sanitizedInput);
+      } else {
+        console.error("Invalid input: Only alphanumeric characters and spaces are allowed.");
+      }
+    },
+    [debouncedSearchInput]
+  );
 
   // Handle price range change
   const handlePriceRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -194,13 +212,13 @@ export default function Home() {
     }
 
     const fuse = new Fuse(foods, {
-      keys: ["name", "tags"], // Search by name and tags
+      keys: ["name", "tags"],
       includeScore: true,
-      threshold: 0.3, // Adjust threshold for more/less strict matching
+      threshold: 0.3,
     });
 
     const results = fuse.search(searchQuery);
-    const suggestedProducts = results.slice(0, 3).map((result) => result.item.name); // Show top 3 suggestions
+    const suggestedProducts = results.slice(0, 3).map((result) => result.item.name);
     setSuggestions(suggestedProducts);
   }, [searchQuery, foods]);
 
@@ -308,7 +326,7 @@ export default function Home() {
           <div className="bg-white flex gap-2">
             <SearchInput searchQuery={searchQuery} onSearchInput={handleSearchInput} />
             <Button className="bg-[#FF9F0D] hover:bg-[#e68906] px-6">
-              <svg className="bg-[#FF9F0D] w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="bg-white w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </Button>
@@ -317,7 +335,7 @@ export default function Home() {
           {/* Display Suggestions */}
           {suggestions.length > 0 && (
             <div className="bg-white mt-4">
-              <p className="bg-white text-gray-600">Did you mean?</p>
+              <p className="bg-white text-gray-600">Did you mean:</p>
               <ul className="bg-white mt-2">
                 {suggestions.map((suggestion, index) => (
                   <li key={index} className="bg-white text-[#FF9F0D] cursor-pointer hover:underline" onClick={() => setSearchQuery(suggestion)}>
@@ -438,9 +456,9 @@ export default function Home() {
                 onChange={handleItemsPerPageChange}
                 className="bg-white p-2 border border-gray-300 rounded"
               >
-                <option className="bg-white" value="6">6 Items</option>
-                <option className="bg-white" value="12">12 Items</option>
-                <option className="bg-white" value="24">24 Items</option>
+                <option value="6">6 Items</option>
+                <option value="12">12 Items</option>
+                <option value="24">24 Items</option>
               </select>
             </div>
           </div>
