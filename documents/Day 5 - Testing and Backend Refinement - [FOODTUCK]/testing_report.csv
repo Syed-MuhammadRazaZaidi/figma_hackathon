@@ -1,0 +1,29 @@
+,,,Product Listing Page Report,,,,,
+,,,,,,,,
+Below is the structure of the CSV file and an example of its content:,,,,,,,,
+,,,,,,,,
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Status,Severity Level,Assigned To,Remarks
+1,Product Listing,Load the page,Products should display,Products displayed,Passed,Low,,All products loaded successfully. No performance issues observed.
+2,Search Functionality,"Search for ""Burger""",Burger products should display,Burger products displayed,Passed,Low,,Search results matched the query. No delays in rendering.
+3,Search Suggestions,"Search for ""burgr""","Show suggestion: ""Did you mean: Burger?""",Suggestion displayed,Passed,Low,,Fuzzy search worked as expected. Suggestions were relevant and helpful.
+4,Filter by Category,"Select ""Sandwiches"" category",Only sandwiches should display,Only sandwiches displayed,Passed,Low,,Filters applied correctly. No unexpected products were shown.
+5,Filter by Price Range,Set price range to 10?10?20,Products within 10?10?20 should display,Products within 10?10?20 displayed,Passed,Low,,Price range filter worked as expected. No outliers were displayed.
+6,Sort by Price (Low to High),"Select ""Price: Low to High""",Products sorted by price (low to high),Products sorted by price (low to high),Passed,Low,,Sorting logic was accurate. No discrepancies in product order.
+7,Pagination,"Click ""Next"" button",Next set of products should display,Next set of products displayed,Passed,Low,,Pagination worked smoothly. No missing or duplicate products.
+8,API Failure Handling,Simulate API failure,Error message should display,Error message displayed,Passed,Low,,Fallback UI was displayed correctly. Retry button functioned as expected.
+9,Empty State Handling,Search for a non-existent product,"""No such products found"" message should show","""No such products found"" message shown",Passed,Low,,Empty state UI was clear and user-friendly. Suggestions were provided.
+,,,,,,,,
+,,,Shopping Cart Page Report,,,,,
+The testing report is submitted in CSV format with the following columns:,,,,,,,,
+,,,,,,,,
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Status,Severity Level,Assigned To,Remarks
+1,Display empty cart message,1. Open the cart page with no items.,"""Your cart is empty"" message displayed.","""Your cart is empty"" message displayed.",Passed,Low,,Fallback UI works as expected.
+2,Add item to cart,1. Add an item to the cart. 2. Open the cart page.,Item displayed in the cart.,Item displayed in the cart.,Passed,Low,,Item added successfully with correct details.
+3,Update item quantity,1. Update the quantity of an item in the cart.,Total price updates correctly.,Total price updates correctly.,Passed,Low,,Quantity updates reflected in the total price.
+4,Remove item from cart,1. Remove an item from the cart.,Item no longer displayed in the cart.,Item no longer displayed in the cart.,Passed,Low,,Item removed successfully.
+5,Apply valid coupon code,"1. Enter ""DISCOUNT10"" in the coupon field. 2. Click ""Apply"".",10% discount applied to the total.,10% discount applied to the total.,Passed,Low,,Coupon code applied successfully.
+6,Apply invalid coupon code,"1. Enter an invalid coupon code. 2. Click ""Apply"".",No discount applied.,No discount applied.,Passed,Low,,Invalid coupon code handled gracefully.
+7,Proceed to checkout,"1. Click ""Proceed to Checkout"".",Redirects to checkout page with cart data.,Redirects to checkout page with cart data.,Passed,Low,,Checkout process works as expected.
+8,Handle invalid quantity input,1. Enter a negative number or non-numeric value in the quantity field.,Error message displayed.,Error message displayed.,Passed,Low,,Invalid quantity inputs handled gracefully.
+9,Handle maximum quantity limit,1. Enter a quantity greater than 10.,Error message displayed.,Error message displayed.,Passed,Low,,Quantity limit enforced successfully.
+10,Handle checkout with empty cart,"1. Click ""Proceed to Checkout"" with an empty cart.",Error message displayed.,Error message displayed.,Passed,Low,,Checkout blocked for empty cart with appropriate error message.
