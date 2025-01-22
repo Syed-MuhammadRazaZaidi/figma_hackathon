@@ -15,7 +15,7 @@ const FigmaHero = () => {
           />
         </div>
         <div className='mt-5 text-center md:text-left'>
-          <h1 className='flex flex-col md:flex-row text-[#FF9F0D] text-4xl md:text-6xl font-bold'>
+          <h1 className='flex-col md:flex-row text-[#FF9F0D] text-4xl md:text-6xl font-bold'>
             Th<span className='text-white'>e Art of speed</span>
           </h1>
           <h1 className='text-4xl md:text-6xl font-bold'>food Quality</h1>
