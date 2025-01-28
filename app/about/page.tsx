@@ -4,7 +4,7 @@ import Aboutus from '@/components/AboutPages/AboutUs'
 
 const About = () => {
   return (
-    <div className='bg-white'>
+    <div>
       <AboutHero />
       <Aboutus />
     </div>
