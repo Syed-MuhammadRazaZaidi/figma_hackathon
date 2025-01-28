@@ -6,10 +6,10 @@ export default function Aboutus() {
     <div>
       {/* Frist Section: Content and Buttons */}
       <section className="bg-white text-white body-font">
-        <div className="bg-white container mx-auto flex px-5 py-24">
-          <div className="bg-white flex flex-col md:flex-row items-center md:space-x-4 mt-2 ml-2">
+        <div className="bg-white container mx-auto flex px-5 py-24 flex-col md:flex-row items-center justify-center">
+          <div className="bg-white flex flex-col md:flex-row items-center md:space-x-4 mt-2">
             <Image
-              className="bg-white object-cover object-center w-336px h-536px mt-530px ml-300px radius-6px"
+              className="bg-white object-cover object-center w-336px h-536px radius-6px"
               alt="hero"
               src="/aboutus.png"
               width={309}
@@ -17,9 +17,9 @@ export default function Aboutus() {
             />
           </div>
           {/* Right Images */}
-          <div className="bg-white flex flex-col space-y-2 space-x-2 mt-2 ml-2">
+          <div className="bg-white flex flex-col space-y-2 mt-2">
             <Image
-              className="bg-white object-cover object-center w-309px h-271px mt-584px ml-660px radius-6px"
+              className="bg-white object-cover object-center w-309px h-271px radius-6px"
               alt="image2"
               src="/about4.png"
               width={309}
@@ -27,7 +27,7 @@ export default function Aboutus() {
             />
             {/* Bottom Image */}
             <Image
-              className="bg-white object-cover object-center w-309px h-382px mt-882px ml-660px radius-6px"
+              className="bg-white object-cover object-center w-309px h-382px radius-6px"
               alt="image3"
               src="/about3.png"
               width={309}
@@ -64,11 +64,11 @@ export default function Aboutus() {
 
       {/* Second Section */}
       <section className="bg-white text-white body-font">
-        <div className="bg-white container mx-auto flex px-5 py-24 items-center justify-center flex-col w-full sm:w-[579px]">
-          <h1 className="bg-white text-black text-3xl font-bold mt-3 text-center">
+        <div className="bg-white container mx-auto flex px-5 py-24 items-center justify-center flex-col w-full sm:w-[579px] text-center">
+          <h1 className="bg-white text-black text-3xl font-bold mt-3">
             Why Choose Us
           </h1>
-          <p className="bg-white text-black text-center mt-2">
+          <p className="bg-white text-black mt-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
             diam pellentesque bibendum non dui volutpat fringilla bibendum.
           </p>
