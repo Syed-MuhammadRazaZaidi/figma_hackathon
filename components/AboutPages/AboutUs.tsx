@@ -89,7 +89,7 @@ export default function Aboutus() {
               <div className="bg-white h-full flex justify-center items-center flex-col border-2 rounded-lg overflow-hidden">
                 <Image
                   className="bg-white"
-                  src="/student.png"
+                  src="/Student.png"
                   width={80}
                   height={80}
                   alt="blog"
@@ -109,7 +109,7 @@ export default function Aboutus() {
               <div className="bg-white h-full border-2 flex justify-center items-center flex-col rounded-lg overflow-hidden">
                 <Image
                   className="bg-white"
-                  src="/coffee.png"
+                  src="/Coffee.png"
                   width={80}
                   height={80}
                   alt="blog"
