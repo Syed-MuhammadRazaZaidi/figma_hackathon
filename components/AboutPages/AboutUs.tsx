@@ -7,7 +7,7 @@ export default function Aboutus() {
       {/* Frist Section: Content and Buttons */}
       <section className="bg-white text-white body-font">
         <div className="bg-white container mx-auto flex px-5 py-24 flex-col md:flex-row items-center justify-center">
-          <div className="bg-white flex flex-col md:flex-row items-center md:space-x-4 mt-2">
+          <div className="bg-white flex flex-col md:flex-row items-center md:space-x-4 mt-2 lg:p-2">
             <Image
               className="bg-white object-cover object-center w-336px h-536px radius-6px"
               alt="hero"

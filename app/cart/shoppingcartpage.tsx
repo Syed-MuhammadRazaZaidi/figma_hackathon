@@ -66,7 +66,7 @@ const ShoppingCart: React.FC = () => {
       const queryString = new URLSearchParams({
         cartData: JSON.stringify(cartData)
       }).toString();
-      router.push(`/checkout?${queryString}`);
+      router.push(`/checkout/checkout?${queryString}`);
     } catch (error) {
       console.error("Checkout error:", error);
       setCheckoutError("Checkout failed. Please try again.");
@@ -83,55 +83,57 @@ const ShoppingCart: React.FC = () => {
 
   return (
     <div className="bg-white font-sans">
-      <div className="bg-white py-12 px-6 md:px-16 lg:px-28">
+      <div className="bg-white py-12 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-28">
         {cartItems.length === 0 ? (
           <p className="bg-white text-center text-gray-500">Your cart is empty. Start shopping now!</p>
         ) : (
-          <table className="bg-white w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-left">
-                <th className="bg-gray-100 p-4 font-semibold">Product</th>
-                <th className="bg-gray-100 p-4 font-semibold">Price</th>
-                <th className="bg-gray-100 p-4 font-semibold">Quantity</th>
-                <th className="bg-gray-100 p-4 font-semibold">Total</th>
-                <th className="bg-gray-100 p-4 font-semibold">Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems.map((item) => (
-                <tr key={item.id} className="bg-white border-b">
-                  <td className="bg-white p-4 flex items-center">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={64}
-                      height={64}
-                      className="bg-white w-16 h-16 object-cover rounded mr-4"
-                      loading="lazy"
-                    />
-                    <span className="bg-white">{item.name}</span>
-                  </td>
-                  <td className="bg-white p-4">${item.price.toFixed(2)}</td>
-                  <td className="bg-white p-4">
-                    <Input
-                      type="number"
-                      value={item.quantity}
-                      onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-                      className="bg-white w-16 border rounded px-2 py-1 text-center"
-                      min="0"
-                    />
-                  </td>
-                  <td className="bg-white p-4">${(item.price * item.quantity).toFixed(2)}</td>
-                  <td className="bg-white p-4 text-red-500 cursor-pointer" onClick={() => removeItem(item.id)}>
-                    &times;
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="bg-white w-full border-separate" style={{ borderSpacing: '0 10px' }}>
+              <thead>
+                <tr className="bg-gray-100 text-left">
+                  <th className="bg-gray-100 p-4 font-semibold border">Product</th>
+                  <th className="bg-gray-100 p-4 font-semibold border">Price</th>
+                  <th className="bg-gray-100 p-4 font-semibold border">Quantity</th>
+                  <th className="bg-gray-100 p-4 font-semibold border">Total</th>
+                  <th className="bg-gray-100 font-semibold border">Remove</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {cartItems.map((item) => (
+                  <tr key={item.id} className="bg-white border-b">
+                    <td className="bg-white p-4 flex items-center border">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        width={64}
+                        height={64}
+                        className="bg-white w-16 h-16 object-cover rounded mr-4"
+                        loading="lazy"
+                      />
+                      <span className="bg-white mr-16 ">{item.name}</span>
+                    </td>
+                    <td className="bg-white p-4 border">${item.price.toFixed(2)}</td>
+                    <td className="bg-white p-4 border">
+                      <Input
+                        type="number"
+                        value={item.quantity}
+                        onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                        className="bg-white w-16 border rounded px-2 py-1 text-center"
+                        min="0"
+                      />
+                    </td>
+                    <td className="bg-white p-4 border">${(item.price * item.quantity).toFixed(2)}</td>
+                    <td className="bg-white p-4 text-center text-red-500 cursor-pointer border" onClick={() => removeItem(item.id)}>
+                      &times;
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
 
-        <div className="bg-white flex flex-col lg:flex-row justify-between items-start lg:items-center mt-10">
+        <div className="bg-white flex flex-col lg:flex-row justify-between items-start lg:items-center mt-10 space-y-6 lg:space-y-0 lg:space-x-10">
           <div className="bg-white w-full lg:w-1/2 mb-6 lg:mb-0">
             <h2 className="bg-white text-lg font-semibold mb-2">Coupon Code</h2>
             <div className="bg-white flex items-center">

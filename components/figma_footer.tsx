@@ -8,7 +8,7 @@ const FigmaFooter = () => {
   return (
     <>
       <footer className='w-full bg-black'>
-        <div className='container mx-auto px-4 sm:px-6 lg:px-8 mt-32'>
+        <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-32'>
           <div className='flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 py-10'>
             <div className='text-center lg:text-left max-w-xl'>
               <h1 className='text-[#FF9F0D] text-3xl lg:text-4xl font-bold'>
@@ -19,7 +19,7 @@ const FigmaFooter = () => {
             
             <div className='w-full lg:w-auto flex flex-col sm:flex-row items-center justify-center'>
               <input 
-                className='bg-[#FF9F0D] text-white px-6 py-4 rounded-sm w-full sm:w-80'
+                className='bg-[#FF9F0D] text-white px-6 py-4 rounded-sm w-full sm:w-80 text-center placeholder:text-white'
                 type="email" 
                 placeholder="Enter Your Email" 
               />
@@ -109,7 +109,7 @@ const FigmaFooter = () => {
         <div className='bg-[#4F4F4F] py-6'>
           <div className='bg-transparent container mx-auto px-4 flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4'>
             <p className='bg-transparent text-gray-300 text-center'>
-              Copyright © {new Date().getFullYear()} by Ayeman. All Rights Reserved.
+              Copyright © {new Date().getFullYear()} by M.Raza. All Rights Reserved.
             </p>
             <div className=" bg-transparent flex justify-center gap-6">
               {[FaFacebook, FaInstagram, FaYoutube, FaXTwitter].map((Icon, index) => (

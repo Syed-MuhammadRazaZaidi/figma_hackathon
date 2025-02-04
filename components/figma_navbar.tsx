@@ -13,7 +13,7 @@ import { User } from 'lucide-react';
 
 const FigmaNavbar = () => {
   return (
-    <div className='bg-black mt-10'>
+    <div className='bg-black py-10'>
       <nav className='container mx-auto bg-black px-4'>
         <div className='hidden lg:flex justify-center py-4'>
           <div className='flex items-center text-2xl'>
