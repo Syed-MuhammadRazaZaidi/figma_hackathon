@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { createPaymentIntent } from "./action";
@@ -22,6 +22,14 @@ interface CartDetails {
 }
 
 export default function StripePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <StripePageContent />
+    </Suspense>
+  );
+}
+
+function StripePageContent() {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [cartDetails, setCartDetails] = useState<CartDetails>({ cartItems: [] });
   const searchParams = useSearchParams();
@@ -55,7 +63,9 @@ export default function StripePage() {
       <div className="bg-white container mx-auto flex items-center justify-center p-16">
         <div className="bg-white" style={{ maxWidth: 800, width: "100%", padding: 20 }}>
           <Elements stripe={stripePromise} options={{ clientSecret }}>
-            <PaymentForm totalAmount={amount} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <PaymentForm totalAmount={amount} />
+            </Suspense>
           </Elements>
         </div>
       </div>
